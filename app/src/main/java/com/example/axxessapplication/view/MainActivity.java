@@ -1,8 +1,10 @@
-package com.example.axxessapplication;
+package com.example.axxessapplication.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.axxessapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 

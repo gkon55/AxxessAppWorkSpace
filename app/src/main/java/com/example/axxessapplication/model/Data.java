@@ -1,296 +1,447 @@
 package com.example.axxessapplication.model;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+public class Data {
 
-public class Data
-{
+    @SerializedName("id")
+    @Expose
     private String id;
-
+    @SerializedName("title")
+    @Expose
     private String title;
-
+    @SerializedName("description")
+    @Expose
     private String description;
-
-    private int datetime;
-
+    @SerializedName("datetime")
+    @Expose
+    private Integer datetime;
+    @SerializedName("cover")
+    @Expose
     private String cover;
-
-    private int cover_width;
-
-    private int cover_height;
-
-    private String account_url;
-
-    private int account_id;
-
+    @SerializedName("cover_width")
+    @Expose
+    private Integer coverWidth;
+    @SerializedName("cover_height")
+    @Expose
+    private Integer coverHeight;
+    @SerializedName("account_url")
+    @Expose
+    private String accountUrl;
+    @SerializedName("account_id")
+    @Expose
+    private Integer accountId;
+    @SerializedName("privacy")
+    @Expose
     private String privacy;
-
+    @SerializedName("layout")
+    @Expose
     private String layout;
-
-    private int views;
-
+    @SerializedName("views")
+    @Expose
+    private Integer views;
+    @SerializedName("link")
+    @Expose
     private String link;
-
-    private int ups;
-
-    private int downs;
-
-    private int points;
-
-    private int score;
-
-    private boolean is_album;
-
+    @SerializedName("ups")
+    @Expose
+    private Integer ups;
+    @SerializedName("downs")
+    @Expose
+    private Integer downs;
+    @SerializedName("points")
+    @Expose
+    private Integer points;
+    @SerializedName("score")
+    @Expose
+    private Integer score;
+    @SerializedName("is_album")
+    @Expose
+    private Boolean isAlbum;
+    @SerializedName("vote")
+    @Expose
     private String vote;
-
-    private boolean favorite;
-
-    private boolean nsfw;
-
+    @SerializedName("favorite")
+    @Expose
+    private Boolean favorite;
+    @SerializedName("nsfw")
+    @Expose
+    private Boolean nsfw;
+    @SerializedName("section")
+    @Expose
     private String section;
-
-    private int comment_count;
-
-    private int favorite_count;
-
+    @SerializedName("comment_count")
+    @Expose
+    private Integer commentCount;
+    @SerializedName("favorite_count")
+    @Expose
+    private Integer favoriteCount;
+    @SerializedName("topic")
+    @Expose
     private String topic;
+    @SerializedName("topic_id")
+    @Expose
+    private Integer topicId;
+    @SerializedName("images_count")
+    @Expose
+    private Integer imagesCount;
+    @SerializedName("in_gallery")
+    @Expose
+    private Boolean inGallery;
+    @SerializedName("is_ad")
+    @Expose
+    private Boolean isAd;
+    @SerializedName("tags")
+    @Expose
+    private List<Tag> tags = null;
+    @SerializedName("ad_type")
+    @Expose
+    private Integer adType;
+    @SerializedName("ad_url")
+    @Expose
+    private String adUrl;
+    @SerializedName("in_most_viral")
+    @Expose
+    private Boolean inMostViral;
+    @SerializedName("include_album_ads")
+    @Expose
+    private Boolean includeAlbumAds;
+    @SerializedName("images")
+    @Expose
+    private List<Image> images = null;
+    @SerializedName("ad_config")
+    @Expose
+    private AdConfig adConfig;
 
-    private int topic_id;
+    public String getId() {
+        return id;
+    }
 
-    private int images_count;
-
-    private boolean in_gallery;
-
-    private boolean is_ad;
-
-    private List<String> tags;
-
-    private int ad_type;
-
-    private String ad_url;
-
-    private boolean in_most_viral;
-
-    private boolean include_album_ads;
-
-    private List<Images> images;
-
-    private AdConfig ad_config;
-
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
-    public String getId(){
-        return this.id;
+
+    public String getTitle() {
+        return title;
     }
-    public void setTitle(String title){
+
+    public void setTitle(String title) {
         this.title = title;
     }
-    public String getTitle(){
-        return this.title;
+
+    public String getDescription() {
+        return description;
     }
-    public void setDescription(String description){
+
+    public void setDescription(String description) {
         this.description = description;
     }
-    public String getDescription(){
-        return this.description;
+
+    public Integer getDatetime() {
+        return datetime;
     }
-    public void setDatetime(int datetime){
+
+    public void setDatetime(Integer datetime) {
         this.datetime = datetime;
     }
-    public int getDatetime(){
-        return this.datetime;
+
+    public String getCover() {
+        return cover;
     }
-    public void setCover(String cover){
+
+    public void setCover(String cover) {
         this.cover = cover;
     }
-    public String getCover(){
-        return this.cover;
+
+    public Integer getCoverWidth() {
+        return coverWidth;
     }
-    public void setCover_width(int cover_width){
-        this.cover_width = cover_width;
+
+    public void setCoverWidth(Integer coverWidth) {
+        this.coverWidth = coverWidth;
     }
-    public int getCover_width(){
-        return this.cover_width;
+
+    public Integer getCoverHeight() {
+        return coverHeight;
     }
-    public void setCover_height(int cover_height){
-        this.cover_height = cover_height;
+
+    public void setCoverHeight(Integer coverHeight) {
+        this.coverHeight = coverHeight;
     }
-    public int getCover_height(){
-        return this.cover_height;
+
+    public String getAccountUrl() {
+        return accountUrl;
     }
-    public void setAccount_url(String account_url){
-        this.account_url = account_url;
+
+    public void setAccountUrl(String accountUrl) {
+        this.accountUrl = accountUrl;
     }
-    public String getAccount_url(){
-        return this.account_url;
+
+    public Integer getAccountId() {
+        return accountId;
     }
-    public void setAccount_id(int account_id){
-        this.account_id = account_id;
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
-    public int getAccount_id(){
-        return this.account_id;
+
+    public String getPrivacy() {
+        return privacy;
     }
-    public void setPrivacy(String privacy){
+
+    public void setPrivacy(String privacy) {
         this.privacy = privacy;
     }
-    public String getPrivacy(){
-        return this.privacy;
+
+    public String getLayout() {
+        return layout;
     }
-    public void setLayout(String layout){
+
+    public void setLayout(String layout) {
         this.layout = layout;
     }
-    public String getLayout(){
-        return this.layout;
+
+    public Integer getViews() {
+        return views;
     }
-    public void setViews(int views){
+
+    public void setViews(Integer views) {
         this.views = views;
     }
-    public int getViews(){
-        return this.views;
+
+    public String getLink() {
+        return link;
     }
-    public void setLink(String link){
+
+    public void setLink(String link) {
         this.link = link;
     }
-    public String getLink(){
-        return this.link;
+
+    public Integer getUps() {
+        return ups;
     }
-    public void setUps(int ups){
+
+    public void setUps(Integer ups) {
         this.ups = ups;
     }
-    public int getUps(){
-        return this.ups;
+
+    public Integer getDowns() {
+        return downs;
     }
-    public void setDowns(int downs){
+
+    public void setDowns(Integer downs) {
         this.downs = downs;
     }
-    public int getDowns(){
-        return this.downs;
+
+    public Integer getPoints() {
+        return points;
     }
-    public void setPoints(int points){
+
+    public void setPoints(Integer points) {
         this.points = points;
     }
-    public int getPoints(){
-        return this.points;
+
+    public Integer getScore() {
+        return score;
     }
-    public void setScore(int score){
+
+    public void setScore(Integer score) {
         this.score = score;
     }
-    public int getScore(){
-        return this.score;
+
+    public Boolean getIsAlbum() {
+        return isAlbum;
     }
-    public void setIs_album(boolean is_album){
-        this.is_album = is_album;
+
+    public void setIsAlbum(Boolean isAlbum) {
+        this.isAlbum = isAlbum;
     }
-    public boolean getIs_album(){
-        return this.is_album;
+
+    public String getVote() {
+        return vote;
     }
-    public void setVote(String vote){
+
+    public void setVote(String vote) {
         this.vote = vote;
     }
-    public String getVote(){
-        return this.vote;
+
+    public Boolean getFavorite() {
+        return favorite;
     }
-    public void setFavorite(boolean favorite){
+
+    public void setFavorite(Boolean favorite) {
         this.favorite = favorite;
     }
-    public boolean getFavorite(){
-        return this.favorite;
+
+    public Boolean getNsfw() {
+        return nsfw;
     }
-    public void setNsfw(boolean nsfw){
+
+    public void setNsfw(Boolean nsfw) {
         this.nsfw = nsfw;
     }
-    public boolean getNsfw(){
-        return this.nsfw;
+
+    public String getSection() {
+        return section;
     }
-    public void setSection(String section){
+
+    public void setSection(String section) {
         this.section = section;
     }
-    public String getSection(){
-        return this.section;
+
+    public Integer getCommentCount() {
+        return commentCount;
     }
-    public void setComment_count(int comment_count){
-        this.comment_count = comment_count;
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
-    public int getComment_count(){
-        return this.comment_count;
+
+    public Integer getFavoriteCount() {
+        return favoriteCount;
     }
-    public void setFavorite_count(int favorite_count){
-        this.favorite_count = favorite_count;
+
+    public void setFavoriteCount(Integer favoriteCount) {
+        this.favoriteCount = favoriteCount;
     }
-    public int getFavorite_count(){
-        return this.favorite_count;
+
+    public String getTopic() {
+        return topic;
     }
-    public void setTopic(String topic){
+
+    public void setTopic(String topic) {
         this.topic = topic;
     }
-    public String getTopic(){
-        return this.topic;
+
+    public Integer getTopicId() {
+        return topicId;
     }
-    public void setTopic_id(int topic_id){
-        this.topic_id = topic_id;
+
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
-    public int getTopic_id(){
-        return this.topic_id;
+
+    public Integer getImagesCount() {
+        return imagesCount;
     }
-    public void setImages_count(int images_count){
-        this.images_count = images_count;
+
+    public void setImagesCount(Integer imagesCount) {
+        this.imagesCount = imagesCount;
     }
-    public int getImages_count(){
-        return this.images_count;
+
+    public Boolean getInGallery() {
+        return inGallery;
     }
-    public void setIn_gallery(boolean in_gallery){
-        this.in_gallery = in_gallery;
+
+    public void setInGallery(Boolean inGallery) {
+        this.inGallery = inGallery;
     }
-    public boolean getIn_gallery(){
-        return this.in_gallery;
+
+    public Boolean getIsAd() {
+        return isAd;
     }
-    public void setIs_ad(boolean is_ad){
-        this.is_ad = is_ad;
+
+    public void setIsAd(Boolean isAd) {
+        this.isAd = isAd;
     }
-    public boolean getIs_ad(){
-        return this.is_ad;
+
+    public List<Tag> getTags() {
+        return tags;
     }
-    public void setTags(List<String> tags){
+
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
-    public List<String> getTags(){
-        return this.tags;
+
+    public Integer getAdType() {
+        return adType;
     }
-    public void setAd_type(int ad_type){
-        this.ad_type = ad_type;
+
+    public void setAdType(Integer adType) {
+        this.adType = adType;
     }
-    public int getAd_type(){
-        return this.ad_type;
+
+    public String getAdUrl() {
+        return adUrl;
     }
-    public void setAd_url(String ad_url){
-        this.ad_url = ad_url;
+
+    public void setAdUrl(String adUrl) {
+        this.adUrl = adUrl;
     }
-    public String getAd_url(){
-        return this.ad_url;
+
+    public Boolean getInMostViral() {
+        return inMostViral;
     }
-    public void setIn_most_viral(boolean in_most_viral){
-        this.in_most_viral = in_most_viral;
+
+    public void setInMostViral(Boolean inMostViral) {
+        this.inMostViral = inMostViral;
     }
-    public boolean getIn_most_viral(){
-        return this.in_most_viral;
+
+    public Boolean getIncludeAlbumAds() {
+        return includeAlbumAds;
     }
-    public void setInclude_album_ads(boolean include_album_ads){
-        this.include_album_ads = include_album_ads;
+
+    public void setIncludeAlbumAds(Boolean includeAlbumAds) {
+        this.includeAlbumAds = includeAlbumAds;
     }
-    public boolean getInclude_album_ads(){
-        return this.include_album_ads;
+
+    public List<Image> getImages() {
+        return images;
     }
-    public void setImages(List<Images> images){
+
+    public void setImages(List<Image> images) {
         this.images = images;
     }
-    public List<Images> getImages(){
-        return this.images;
+
+    public AdConfig getAdConfig() {
+        return adConfig;
     }
-    public void setAd_config(AdConfig ad_config){
-        this.ad_config = ad_config;
+
+    public void setAdConfig(AdConfig adConfig) {
+        this.adConfig = adConfig;
     }
-    public AdConfig getAd_config(){
-        return this.ad_config;
+
+    @Override
+    public String toString() {
+        return "Data{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", datetime=" + datetime +
+                ", cover='" + cover + '\'' +
+                ", coverWidth=" + coverWidth +
+                ", coverHeight=" + coverHeight +
+                ", accountUrl='" + accountUrl + '\'' +
+                ", accountId=" + accountId +
+                ", privacy='" + privacy + '\'' +
+                ", layout='" + layout + '\'' +
+                ", views=" + views +
+                ", link='" + link + '\'' +
+                ", ups=" + ups +
+                ", downs=" + downs +
+                ", points=" + points +
+                ", score=" + score +
+                ", isAlbum=" + isAlbum +
+                ", vote='" + vote + '\'' +
+                ", favorite=" + favorite +
+                ", nsfw=" + nsfw +
+                ", section='" + section + '\'' +
+                ", commentCount=" + commentCount +
+                ", favoriteCount=" + favoriteCount +
+                ", topic='" + topic + '\'' +
+                ", topicId=" + topicId +
+                ", imagesCount=" + imagesCount +
+                ", inGallery=" + inGallery +
+                ", isAd=" + isAd +
+                ", tags=" + tags +
+                ", adType=" + adType +
+                ", adUrl='" + adUrl + '\'' +
+                ", inMostViral=" + inMostViral +
+                ", includeAlbumAds=" + includeAlbumAds +
+                ", images=" + images +
+                ", adConfig=" + adConfig +
+                '}';
     }
 }

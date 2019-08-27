@@ -12,10 +12,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.axxessapplication.AxxessApplication;
-import com.example.axxessapplication.R;
 import com.example.axxessapplication.data.DataService;
 import com.example.axxessapplication.model.Data;
-import com.example.axxessapplication.model.Images;
 import com.example.axxessapplication.model.Result;
 import com.example.axxessapplication.model.Root;
 
@@ -31,6 +29,8 @@ public class MainViewModel extends ViewModel {
 
   public ObservableField<Boolean> showProgressBar = new ObservableField<>(false);
   public ObservableField<String> searchText = new ObservableField<>("");
+
+
   public MutableLiveData<ArrayList<GridItemViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
 
   private Context context;
@@ -41,23 +41,28 @@ public class MainViewModel extends ViewModel {
       this.context = context;
   }
 
+    public MutableLiveData<ArrayList<GridItemViewModel>> getArrayListMutableLiveData() {
+        return arrayListMutableLiveData;
+    }
+
   public void fetchData( String searchText){
     AxxessApplication axxessApplication = AxxessApplication.create(context);
       DataService dataService = axxessApplication.getDataService();
-
-      Disposable disposable = dataService.fetchResult(CLIENT_KEY, searchText)
+      Log.d("GIRISH", searchText);
+      Disposable disposable = dataService.fetchResult(searchText.trim())
               .subscribeOn(axxessApplication.subscribeScheduler())
               .observeOn(AndroidSchedulers.mainThread())
               .subscribe(new Consumer<Root>() {
                   @Override
                   public void accept(Root root) throws Exception {
+                      Log.d("GIRISH",root.getData().toString());
                       changeSearchItems(root.getData());
                       showProgressBar.set(false);
                   }
               }, new Consumer<Throwable>() {
                   @Override
                   public void accept(Throwable throwable) throws Exception {
-                     // Log.d(TAG, throwable.getMessage());
+                      Log.d("GIRISH", throwable.getMessage());
                       Toast.makeText(context,"Error Loading Data", Toast.LENGTH_SHORT).show();
                       showProgressBar.set(false);
                   }
@@ -71,11 +76,23 @@ public class MainViewModel extends ViewModel {
       GridItemViewModel gridItemViewModel;
       ArrayList<GridItemViewModel> gridItemViewModelArrayList = new ArrayList<>();
 
-      for (Data data: dataArrayList) {
-        result = new Result(data.getImages().get(0).getTitle(), data.getTitle());
-          gridItemViewModel = new GridItemViewModel(result, context);
-          gridItemViewModelArrayList.add(gridItemViewModel);
+      if(!dataArrayList.isEmpty()) {
+          for (Data data : dataArrayList) {
+              String Title = data.getTitle() != null ? data.getTitle() : "No Title";
+              String urlLink = data.getImages()!= null? (data.getImages().get(0).getLink()!= null ? data.getImages().get(0).getLink(): "") : "";
+              result = new Result(Title, urlLink);
+              gridItemViewModel = new GridItemViewModel(result, context);
+              gridItemViewModelArrayList.add(gridItemViewModel);
+          }
+          arrayListMutableLiveData.setValue(gridItemViewModelArrayList);
       }
-      arrayListMutableLiveData.setValue(gridItemViewModelArrayList);
   }
+
+    public void onClickSearch(View view) {
+        if(!searchText.get().isEmpty()) {
+            showProgressBar.set(true);
+            fetchData(searchText.get());
+        }
+    }
+
 }

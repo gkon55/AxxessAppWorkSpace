@@ -19,31 +19,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/progressBarLoading"
-            android:visibility="invisible"
+            android:visibility="@{mainViewModel.showProgressBar? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <SearchView
-            android:id="@+id/search_id"
+        <EditText
+            android:id="@+id/search_edit_text"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:hint="enter search"
+            android:text="@={mainViewModel.searchText}"
+            app:layout_constraintBottom_toTopOf="@+id/grid_view_id"
+            app:layout_constraintEnd_toStartOf="@+id/search_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:background="@android:drawable/ic_search_category_default"
+            android:onClick="@{mainViewModel::onClickSearch}"
             app:layout_constraintBottom_toTopOf="@+id/grid_view_id"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/search_edit_text"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <GridView
             android:id="@+id/grid_view_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:columnWidth="100dp"
-            android:numColumns="auto_fit"
+            android:numColumns="4"
             android:verticalSpacing="24dp"
             android:horizontalSpacing="10dp"
             android:stretchMode="spacingWidthUniform"
-            app:layout_constraintTop_toBottomOf="@+id/search_id"
+            app:layout_constraintTop_toBottomOf="@+id/search_edit_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

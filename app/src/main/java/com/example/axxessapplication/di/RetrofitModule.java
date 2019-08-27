@@ -1,9 +1,12 @@
 package com.example.axxessapplication.di;
 
 import com.example.axxessapplication.data.DataService;
+import com.example.axxessapplication.model.DateTimeConverter;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.joda.time.DateTime;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,9 +30,12 @@ public class RetrofitModule {
     @Provides
     @AxxessApplicationScope
     Gson provideGson() {
-        GsonBuilder builder =
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(DateTime.class, new DateTimeConverter());
+        return gsonBuilder.create();
+       /* GsonBuilder builder =
                 new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        return builder.setLenient().create();
+        return builder.setLenient().create();*/
     }
     @Provides
     @AxxessApplicationScope

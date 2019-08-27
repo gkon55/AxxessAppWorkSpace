@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AxxessApplication extends Application {
 
-    AxxessApplicaitonComponent axxessApplicaitonComponent;
+    protected AxxessApplicaitonComponent axxessApplicaitonComponent;
     Context context;
     private Scheduler scheduler;
     private DataService dataService;
@@ -41,11 +41,11 @@ public class AxxessApplication extends Application {
         return scheduler;
     }
 
-    public AxxessApplicaitonComponent getAxxessApplicaitonComponent() {
-        return axxessApplicaitonComponent;
-    }
-
     public DataService getDataService() {
         return dataService;
+    }
+
+    public AxxessApplicaitonComponent getComponent(){
+        return axxessApplicaitonComponent;
     }
 }

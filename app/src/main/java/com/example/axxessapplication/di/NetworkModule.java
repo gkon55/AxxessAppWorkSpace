@@ -10,8 +10,8 @@ import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.internal.http.HttpHeaders;
 import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
@@ -45,9 +45,15 @@ public class NetworkModule {
 
     @Provides
     @AxxessApplicationScope
-    public OkHttpClient okHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
+    public OkHttpClient okHttpClient(Cache cache) {
         return new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request request = chain.request().newBuilder().addHeader("Authorization", "Client-ID 137cda6b5008a7c").build();
+                        return chain.proceed(request);
+                    }
+                })
                 .cache(cache)
                 .build();
     }

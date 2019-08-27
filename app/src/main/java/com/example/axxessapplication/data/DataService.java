@@ -10,5 +10,5 @@ import retrofit2.http.Query;
 public interface DataService {
 
   @GET("/3/gallery/search/1")
-  Observable<Root> fetchResult(@Header("Authorization") String token, @Query ("q") String search);
+  Observable<Root> fetchResult(@Query ("q") String search);
 }

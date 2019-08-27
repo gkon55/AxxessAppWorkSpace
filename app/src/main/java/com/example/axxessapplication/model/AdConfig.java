@@ -1,37 +1,55 @@
 package com.example.axxessapplication.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+
 public class AdConfig {
-    private List<String> safeFlags;
 
-    private List<String> highRiskFlags;
+    @SerializedName("safeFlags")
+    @Expose
+    private List<String> safeFlags = null;
+    @SerializedName("highRiskFlags")
+    @Expose
+    private List<String> highRiskFlags = null;
+    @SerializedName("unsafeFlags")
+    @Expose
+    private List<String> unsafeFlags = null;
+    @SerializedName("showsAds")
+    @Expose
+    private Boolean showsAds;
 
-    private List<String> unsafeFlags;
+    public List<String> getSafeFlags() {
+        return safeFlags;
+    }
 
-    private boolean showsAds;
-
-    public void setSafeFlags(List<String> safeFlags){
+    public void setSafeFlags(List<String> safeFlags) {
         this.safeFlags = safeFlags;
     }
-    public List<String> getSafeFlags(){
-        return this.safeFlags;
+
+    public List<String> getHighRiskFlags() {
+        return highRiskFlags;
     }
-    public void setHighRiskFlags(List<String> highRiskFlags){
+
+    public void setHighRiskFlags(List<String> highRiskFlags) {
         this.highRiskFlags = highRiskFlags;
     }
-    public List<String> getHighRiskFlags(){
-        return this.highRiskFlags;
+
+    public List<String> getUnsafeFlags() {
+        return unsafeFlags;
     }
-    public void setUnsafeFlags(List<String> unsafeFlags){
+
+    public void setUnsafeFlags(List<String> unsafeFlags) {
         this.unsafeFlags = unsafeFlags;
     }
-    public List<String> getUnsafeFlags(){
-        return this.unsafeFlags;
+
+    public Boolean getShowsAds() {
+        return showsAds;
     }
-    public void setShowsAds(boolean showsAds){
+
+    public void setShowsAds(Boolean showsAds) {
         this.showsAds = showsAds;
     }
-    public boolean getShowsAds(){
-        return this.showsAds;
-    }
+
 }

@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.DetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="detailViewModel"
+            type="com.example.axxessapplication.viewmodel.DetailViewModel" />
+    </data>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:gravity="center"
+        android:padding="1dp">
+
+        <TextView
+            android:id="@+id/image_title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="1dp"
+            android:maxLines="1"
+            android:maxLength="10"
+            android:text="@{detailViewModel.title}"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            tools:imageUrl="@{detailViewModel.imageUrl}" />
+
+        <EditText
+            android:id="@+id/comment_edit_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:hint="Enter comment here"
+            android:text="@={detailViewModel.commentText}"/>
+
+        <Button
+            android:id="@+id/id_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="submit"
+            android:layout_marginTop="5dp"
+            android:onClick="@{()->detailViewModel.saveCommentToSharedPref()}"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Commentents:"
+            android:textSize="20sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager" />
+
+    </LinearLayout>
+</layout>

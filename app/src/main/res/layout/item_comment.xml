@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="CommentItemBinding">
+        <variable
+            name="commentItemViewModel"
+            type="com.example.axxessapplication.viewmodel.CommentItemViewModel" />
+    </data>
+
+    <TextView
+        android:id="@+id/comment_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:text="@{commentItemViewModel.commentText}"
+        android:textSize="13sp"/>
+</layout>

@@ -20,19 +20,6 @@ public class NetworkModule {
 
     @Provides
     @AxxessApplicationScope
-    public HttpLoggingInterceptor loggingInterceptor() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Timber.i(message);
-            }
-        });
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-        return interceptor;
-    }
-
-    @Provides
-    @AxxessApplicationScope
     public Cache cache(File cacheFile) {
         return new Cache(cacheFile, 10 * 1000 * 1000); //10MB Cahe
     }

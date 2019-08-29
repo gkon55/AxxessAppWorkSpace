@@ -14,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AxxessApplication extends Application {
 
     protected AxxessApplicaitonComponent axxessApplicaitonComponent;
-    Context context;
+    private Context context;
     private Scheduler scheduler;
     private DataService dataService;
 

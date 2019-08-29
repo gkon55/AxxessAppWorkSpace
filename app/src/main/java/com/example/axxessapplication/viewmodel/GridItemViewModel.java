@@ -1,20 +1,18 @@
 package com.example.axxessapplication.viewmodel;
 
 import android.content.Context;
-import android.view.View;
+import android.content.Intent;
 import android.widget.ImageView;
 
 import androidx.databinding.BindingAdapter;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.bumptech.glide.Glide;
 import com.example.axxessapplication.model.Result;
 import com.example.axxessapplication.view.DetailActivity;
 
-import java.util.ArrayList;
-
 public class GridItemViewModel extends ViewModel {
+    private static final String EXTRA_ITEM = "EXTRA_ITEM";
 
     private Result result;
     private Context context;
@@ -37,7 +35,9 @@ public class GridItemViewModel extends ViewModel {
         Glide.with(imageView.getContext()).load(imageUrl).into(imageView);
     }
 
-    public void onItemClicked(View view){
-        context.startActivity(DetailActivity.launchDetail(view.getContext(), result));
+    public void onItemClicked(){
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(EXTRA_ITEM, result);
+        context.startActivity(intent);
     }
 }

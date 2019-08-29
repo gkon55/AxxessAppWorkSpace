@@ -3,18 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data class="GridItemBinding">
-
-        <import type="android.view.View" />
-
         <variable
             name="gridItemViewModel"
             type="com.example.axxessapplication.viewmodel.GridItemViewModel" />
     </data>
 
     <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:onClick="@{() -> gridItemViewModel.onItemClicked()}"
+        android:background="#fff"
+        android:gravity="center"
         android:padding="1dp">
 
         <ImageView
@@ -30,7 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="1dp"
+            android:maxLines="1"
+            android:maxLength="10"
             android:text="@{gridItemViewModel.title}"
-            android:textSize="20sp" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 </layout>

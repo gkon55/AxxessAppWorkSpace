@@ -1,7 +1,6 @@
 package com.example.axxessapplication.viewmodel;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -27,72 +26,79 @@ import io.reactivex.functions.Consumer;
 
 public class MainViewModel extends ViewModel {
 
-  public ObservableField<Boolean> showProgressBar = new ObservableField<>(false);
-  public ObservableField<String> searchText = new ObservableField<>("");
+    public ObservableField<Boolean> showProgressBar = new ObservableField<>(false);
+    public ObservableField<String> searchText = new ObservableField<>("");
 
+    public MutableLiveData<ArrayList<GridItemViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
 
-  public MutableLiveData<ArrayList<GridItemViewModel>> arrayListMutableLiveData = new MutableLiveData<>();
+    private Context context;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-  private Context context;
-  private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-  private static final String CLIENT_KEY = "Client-ID 137cda6b5008a7c";
-
-  public MainViewModel(@NonNull Context context){
-      this.context = context;
-  }
+    public MainViewModel(@NonNull Context context) {
+        this.context = context;
+    }
 
     public MutableLiveData<ArrayList<GridItemViewModel>> getArrayListMutableLiveData() {
         return arrayListMutableLiveData;
     }
 
-  public void fetchData( String searchText){
-    AxxessApplication axxessApplication = AxxessApplication.create(context);
-      DataService dataService = axxessApplication.getDataService();
-      Log.d("GIRISH", searchText);
-      Disposable disposable = dataService.fetchResult(searchText.trim())
-              .subscribeOn(axxessApplication.subscribeScheduler())
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe(new Consumer<Root>() {
-                  @Override
-                  public void accept(Root root) throws Exception {
-                      Log.d("GIRISH",root.getData().toString());
-                      changeSearchItems(root.getData());
-                      showProgressBar.set(false);
-                  }
-              }, new Consumer<Throwable>() {
-                  @Override
-                  public void accept(Throwable throwable) throws Exception {
-                      Log.d("GIRISH", throwable.getMessage());
-                      Toast.makeText(context,"Error Loading Data", Toast.LENGTH_SHORT).show();
-                      showProgressBar.set(false);
-                  }
-              });
+    private void fetchData(String searchText) {
+        AxxessApplication axxessApplication = AxxessApplication.create(context);
+        DataService dataService = axxessApplication.getDataService();
+        Disposable disposable = dataService.fetchResult(searchText.trim())
+                .subscribeOn(axxessApplication.subscribeScheduler())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Root>() {
+                    @Override
+                    public void accept(Root root) throws Exception {
+                        Log.d("GIRISH", root.getData().toString());
+                        changeSearchItems(root.getData());
+                        showProgressBar.set(false);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d("GIRISH", throwable.getMessage());
+                        Toast.makeText(context, "Error Loading Data", Toast.LENGTH_SHORT).show();
+                        showProgressBar.set(false);
+                    }
+                });
 
-      compositeDisposable.add(disposable);
-  }
+        compositeDisposable.add(disposable);
+    }
 
-  private void changeSearchItems(List<Data> dataArrayList){
-      Result result;
-      GridItemViewModel gridItemViewModel;
-      ArrayList<GridItemViewModel> gridItemViewModelArrayList = new ArrayList<>();
+    private void changeSearchItems(List<Data> dataArrayList) {
+        Result result;
+        GridItemViewModel gridItemViewModel;
+        ArrayList<GridItemViewModel> gridItemViewModelArrayList = new ArrayList<>();
 
-      if(!dataArrayList.isEmpty()) {
-          for (Data data : dataArrayList) {
-              String Title = data.getTitle() != null ? data.getTitle() : "No Title";
-              String urlLink = data.getImages()!= null? (data.getImages().get(0).getLink()!= null ? data.getImages().get(0).getLink(): "") : "";
-              result = new Result(Title, urlLink);
-              gridItemViewModel = new GridItemViewModel(result, context);
-              gridItemViewModelArrayList.add(gridItemViewModel);
-          }
-          arrayListMutableLiveData.setValue(gridItemViewModelArrayList);
-      }
-  }
+        if (!dataArrayList.isEmpty()) {
+            for (Data data : dataArrayList) {
+                String id = data.getId() != null ? data.getId() : "1";
+                String title = data.getTitle() != null ? data.getTitle() : "No Title";
+                String urlLink = data.getImages() != null ? (data.getImages().get(0).getLink() != null ? data.getImages().get(0).getLink() : "") : "";
+                result = new Result(id, title, urlLink);
+                gridItemViewModel = new GridItemViewModel(result, context);
+                gridItemViewModelArrayList.add(gridItemViewModel);
+            }
+            arrayListMutableLiveData.setValue(gridItemViewModelArrayList);
+        }
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        if (compositeDisposable != null && !compositeDisposable.isDisposed()) {
+            compositeDisposable.dispose();
+        }
+        compositeDisposable = null;
+        context = null;
+    }
 
     public void onClickSearch(View view) {
-        if(!searchText.get().isEmpty()) {
+        if (!searchText.get().isEmpty()) {
             showProgressBar.set(true);
             fetchData(searchText.get());
         }
     }
-
 }

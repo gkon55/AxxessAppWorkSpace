@@ -33,10 +33,8 @@ public class RetrofitModule {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(DateTime.class, new DateTimeConverter());
         return gsonBuilder.create();
-       /* GsonBuilder builder =
-                new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-        return builder.setLenient().create();*/
     }
+
     @Provides
     @AxxessApplicationScope
     public Retrofit provideRetrofit(OkHttpClient okHttpClient, Gson gson) {
